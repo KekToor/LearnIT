@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "codes",
+  "info": {
+    "singularName": "code",
+    "pluralName": "codes",
+    "displayName": "code",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "text"
+    },
+    "language": {
+      "type": "enumeration",
+      "enum": [
+        "Javascript",
+        "Python",
+        "Go",
+        "Java",
+        "Kotlin",
+        "PHP",
+        "C#",
+        "Swift",
+        "R",
+        "Ruby",
+        "C/C++",
+        "Matlab",
+        "Scala",
+        "TypeScript",
+        "SQL",
+        "HTML",
+        "CSS",
+        "NoSQL",
+        "Rust",
+        "Perl"
+      ]
+    },
+    "difficulty": {
+      "type": "integer",
+      "min": 1,
+      "max": 10,
+      "required": true,
+      "default": 5
+    },
+    "guidetext": {
+      "type": "richtext",
+      "required": true
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "codes"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "code"
+    }
+  }
+}
