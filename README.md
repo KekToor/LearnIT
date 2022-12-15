@@ -17,6 +17,9 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 ## **Worklog**
 
 **24.10** - Vytvoření readme souboru - 30 min
+
 **29.10** - Vytvoření původní aplikace s využitím express.js a Reactu; nakonec jsem upřednostnil Strapi - 2h
+
 **26.11** - První seznámení s CMS systémem Strapi - 90 min
+
 **6.12** - Práce na backendu, vytvoření schémat, naplnění schémat jednoduchým example kódem, zkouška API pomocí HTML requestů v aplikaci Postman - 6h
