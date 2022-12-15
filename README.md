@@ -24,4 +24,4 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 
 **6.12** - Práce na backendu, vytvoření schémat, naplnění schémat jednoduchým example kódem, zkouška API pomocí HTML requestů v aplikaci Postman - 6h
 
-**15.12** - Práce na frontendu, vytvoření layoutu stránky a navbaru - 4h
+**15.12** - Práce na frontendu, vytvoření layoutu stránky a navbaru - 4h30min
