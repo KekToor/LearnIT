@@ -10,7 +10,7 @@ const CodesList = ({ codes }) => {
     console.log(data.meta.pagination.pageCount);
     return (
         <Layout>
-            <h1 className="flex justify-center text-4xl font-extrabold mb-3">
+            <h1 className="flex justify-center text-3xl md:text-4xl font-extrabold mb-3">
                 <span className="text-black dark:text-gray-200">
                     List kódů
                 </span>
@@ -19,23 +19,25 @@ const CodesList = ({ codes }) => {
             <div className="text-left">
                 <Codes codes={data}/>
                 <div className='space-x-2 space-y-2'>
-                    <button className={`md:p-2 rounded py-2 text-black dark:text-white p-2 ${pageIndex === 1 ? 'bg-gray-500' : 'bg-blue-400'}`}
-                            disabled={pageIndex === 1}
-                            onClick={() => setPageIndex(pageIndex - 1)}
-                    >
-                        {' '}
-                        Předchozí
-                    </button>
-                    <button className={`md:p-2 rounded py-2 text-black dark:text-white p-2
+                    <div className='flex content-center justify-center gap-2'>
+                        <button className={`md:p-2 rounded py-2 text-black dark:text-white p-2 ${pageIndex === 1 ? 'bg-gray-500' : 'bg-blue-400'}`}
+                                disabled={pageIndex === 1}
+                                onClick={() => setPageIndex(pageIndex - 1)}
+                        >
+                            {' '}
+                            Předchozí
+                        </button>
+                        <button className={`md:p-2 rounded py-2 text-black dark:text-white p-2
                                         ${pageIndex === (data && data.meta.pagination.pageCount)
-                                        ? 'bg-gray-500' : 'bg-blue-400'}`}
-                            disabled={pageIndex === (data && data.meta.pagination.pageCount)}
-                            onClick={() => setPageIndex(pageIndex + 1)}
-                    >
-                        {' '}
-                        Další
-                    </button>
-                    <div className='grid grid-cols-2 gap-4'>
+                            ? 'bg-gray-500' : 'bg-blue-400'}`}
+                                disabled={pageIndex === (data && data.meta.pagination.pageCount)}
+                                onClick={() => setPageIndex(pageIndex + 1)}
+                        >
+                            {' '}
+                            Další
+                        </button>
+                    </div>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
                         <div>
                             {`Zobrazuje se záznam ${(pageIndex - 1) * (data && data.meta.pagination.pageSize) + 1}
                             ${ ((pageIndex - 1) * (data && data.meta.pagination.pageSize) + 1) === (data && data.meta.pagination.total) ?
@@ -43,10 +45,11 @@ const CodesList = ({ codes }) => {
                                 (data && data.meta.pagination.total)
                                 : pageIndex * (data && data.meta.pagination.pageSize)}`
                             
-                            } ze ${data && data.meta.pagination.total} záznamů`}
+                            } ${(data && data.meta.pagination.total) > 4 ? 'z' : 'ze'}
+                             ${data && data.meta.pagination.total} záznamů`}
                         </div>
                         <div className='text-right'>
-                            {`Stránka ${pageIndex} ze ${
+                            {`Stránka ${pageIndex} ${(data && data.meta.pagination.pageCount) > 4 ? 'z':'ze'} ${
                             data && data.meta.pagination.pageCount
                         }`}
                         </div>

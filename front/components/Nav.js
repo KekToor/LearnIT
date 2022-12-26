@@ -18,7 +18,7 @@ const Nav = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/" className="md:p-1 py-2 block hover:text-gray-300">
+                    <Link href="/codes" className="md:p-1 py-2 block hover:text-gray-300">
                         List Kódů
                     </Link>
                 </li>
