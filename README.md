@@ -28,4 +28,4 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 
 **22.12** - Práce s API, načtení kódů na stránku - 4h
 
-**26.12** - Paginace - 2h
+**26.12** - Paginace, stránky pro jednotlivé kódy, implementace slugů - 3h30min
