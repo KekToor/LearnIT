@@ -20,6 +20,7 @@ const Layout = ({ user, loading = false, children }) => (
                 <div className='font-medium'> {children} </div>
             </div>
         </main>
+        <script>hljs.highlightAll();</script>
     </UserProvider>
 );
 

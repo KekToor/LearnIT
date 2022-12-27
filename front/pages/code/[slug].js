@@ -5,9 +5,13 @@ import {getTokenFromLocalCookie, getTokenFromServerCookie, getUserFromLocalCooki
 import {useRouter} from "next/router";
 import {useState} from "react";
 import {Rating} from "react-simple-star-rating";
+import markdownToHtml from "../../lib/markdownToHTML";
+import 'highlight.js/styles/github.css'
+import hljs from "highlight.js";
+import {useEffect} from "react";
 
 
-const Code = ({ code }) => {
+const Code = ({ code, jwt, guidetext }) => {
     const { user, loading } = useFetchUser();
     const router = useRouter();
     const [review, setReview] = useState({
@@ -51,6 +55,10 @@ const Code = ({ code }) => {
         }
     }
 
+    useEffect(() => {
+        hljs.initHighlightingOnLoad();
+    }, []);
+
     return (
         <Layout user={user}>
             <div className={"flex flex-wrap items-center"}>
@@ -61,10 +69,25 @@ const Code = ({ code }) => {
                     (code.attributes.difficulty < 4 ? "bg-green-400" : "bg-yellow-500") : (code.attributes.difficulty < 9 ? "bg-orange-500" : "bg-red-500")
                 }`}>{code.attributes.difficulty}</div>
             </div>
+            <div className={"flex flex-wrap items-center w-full mb-2"}>
+                <div className={"mr-auto"}>
+                    Programovací jazyk: <strong>{code.attributes.language}</strong>
+                </div>
+                <div className={"ml-auto"}>
+                    Vytvořeno uživatelem<strong>&nbsp;{code.attributes.author}</strong> <i>{(code.attributes.createdAt).replace("T"," ").slice(0,-5)}</i>
+                </div>
+            </div>
+            <hr className={"pt-2"}/>
+            <div className="text-lg">
+                {code.attributes.desc}
+            </div>
+            <h2 className={"text-3xl md:text-4xl font-extrabold leading-tight my-3"}>Obsah</h2>
+            <hr className={"pt-2"}/>
+            <div className={'font-normal'} dangerouslySetInnerHTML={{__html: guidetext}}></div>
 
             { user && (
                 <>
-                    <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-2">
+                    <h2 className="text-3xl md:text-4xl font-bold leading-tight my-2">
                         Recenze
                     </h2>
                     <form onSubmit={handleSubmit}>
@@ -120,9 +143,11 @@ export async function getServerSideProps({ req, params }) {
             } : ''
         );
     if(codeRes.data) {
+        const guidetext = await markdownToHtml(codeRes.data.attributes.guidetext)
         return{
             props: {
                 code: codeRes.data,
+                guidetext,
                 jwt: jwt ? jwt : ''
             }
         }
