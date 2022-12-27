@@ -57,7 +57,7 @@ const Code = ({ code }) => {
                 <h1 className='text-4xl md:text-5xl font-extrabold leading-tight mb-3'>
                     {code.attributes.title}
                 </h1>
-                <div className={`text-4xl md:text-5xl text-white ml-auto mb-3 p-2 rounded-md ${code.attributes.difficulty < 6 ?
+                <div className={`text-4xl md:text-5xl text-white ml-auto mb-3 p-3 rounded-md ${code.attributes.difficulty < 6 ?
                     (code.attributes.difficulty < 4 ? "bg-green-400" : "bg-yellow-500") : (code.attributes.difficulty < 9 ? "bg-orange-500" : "bg-red-500")
                 }`}>{code.attributes.difficulty}</div>
             </div>
