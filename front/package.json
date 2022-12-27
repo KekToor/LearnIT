@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "js-cookie": "^3.0.1",
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-simple-star-rating": "^5.1.7",
     "swr": "^2.0.0"
   },
   "devDependencies": {

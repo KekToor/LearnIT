@@ -8,7 +8,7 @@ const Codes = ({ codes }) => {
                     codes.data.map((code) => {
                         return (
                             <li className="border rounded-md p-2" key={code.id}>
-                                <Link className="flex justify-center font-bold py-2" href={'code/' + code.attributes.slug}>{code.attributes.title}</Link>
+                                <Link className="flex justify-center font-extrabold py-2 text-lg" href={'code/' + code.attributes.slug}>{code.attributes.title}</Link>
                                 <p className="font-normal text-justify">{code.attributes.desc}</p>
                             </li>
                         );

@@ -1,16 +1,17 @@
 import Layout from "../components/Layout";
 import { fetcher } from "../lib/api";
 import Codes from "../components/Codes";
-import useSWR from 'swr'
+import useSWR from 'swr';
 import {useState} from "react";
+import {useFetchUser} from "../lib/authContext";
 
 const CodesList = ({ codes }) => {
+    const { user, loading } = useFetchUser();
     const [pageIndex, setPageIndex] = useState(1);
     const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=${pageIndex}&pagination[pageSize]=2`, fetcher, {fallbackData: codes});
-    console.log(data.meta.pagination.pageCount);
     return (
-        <Layout>
-            <h1 className="flex justify-center text-3xl md:text-4xl font-extrabold mb-3">
+        <Layout user={user}>
+            <h1 className="flex justify-center text-4xl md:text-5xl font-extrabold mb-6">
                 <span className="text-black dark:text-gray-200">
                     List kódů
                 </span>
@@ -66,7 +67,6 @@ export default CodesList;
 
 export async function getStaticProps() {
     const codesRes = await fetcher( `${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=1&pagination[pageSize]=2`);
-    console.log(codesRes);
     return{
         props: {
             codes: codesRes

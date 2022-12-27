@@ -18,13 +18,18 @@
     "rating": {
       "type": "integer",
       "max": 5,
-      "min": 1
+      "min": 1,
+      "required": true
     },
     "code": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::code.code",
       "inversedBy": "reviews"
+    },
+    "reviewer": {
+      "type": "string",
+      "required": true
     }
   }
 }
