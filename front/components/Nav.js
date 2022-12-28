@@ -1,14 +1,19 @@
 import Link from "next/link";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {fetcher} from "../lib/api";
 import {setToken, unsetToken} from "../lib/auth";
 import {useUser} from "../lib/authContext";
+import {useRouter} from "next/router";
 
 const Nav = () => {
     const [data, setData] = useState({
         identifier: '',
         password: ''
     });
+
+    const router = useRouter();
+
+    const [logo, setLogo] = useState('');
 
     const { user, loading } = useUser();
 
@@ -36,12 +41,21 @@ const Nav = () => {
         unsetToken();
     };
 
+    useEffect(() => {
+        const logo = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        console.log(logo);
+        setLogo(logo);
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            const logo = event.matches ? 'dark' : 'light';
+            setLogo(logo);
+        })
+        }, []);
 
     return (
           <nav className='flex flex-wrap items-center justify-between w-full p-4 md:py-0 bg-white dark:bg-slate-800 text-lg text-black dark:text-gray-200'>
               <div>
                   <Link href="/" passHref>
-                      <img className="m-3" src="/yes.jpg" width={50} height={50} alt="LearnIT Logo" />
+                      <img className="m-3" src={`${logo === 'dark' ? '/learnit-light.png' : '/learnit.png'}`} width={159} height={50} alt="LearnIT Logo" />
                   </Link>
               </div>
 
@@ -60,8 +74,8 @@ const Nav = () => {
                       {!loading &&
                           (user ? (
                               <li>
-                                  <Link href="/profile" className="md:p-1 py-2 block hover:text-gray-300 hover:bg-blue-500">
-
+                                  <Link href="/profile" className="py-2 px-1 block hover:text-gray-300">
+                                        Profil
                                   </Link>
                               </li>
                           ) : ('')
@@ -70,7 +84,7 @@ const Nav = () => {
                       {!loading &&
                           (user ? (
                                   <li>
-                                      <button className="p-2 hover:text-gray-300 bg-pink-400 hover:bg-purple-500 rounded rounded-md text-white"
+                                      <button className="p-2 ml-2 hover:text-gray-300 bg-pink-400 hover:bg-purple-500 rounded rounded-md text-white"
                                               onClick={logout}>
                                           Odhlásit se
                                       </button>

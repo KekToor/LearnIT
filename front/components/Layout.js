@@ -11,7 +11,7 @@ const Layout = ({ user, loading = false, children }) => (
             <meta name="author" content="Tomáš Fryčka"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
             <title>LearnIT</title>
-            <link rel="icon" type="image/x-icon" href="/yes.jpg"/>
+            <link rel="icon" type="image/x-icon" href="/logo.png"/>
         </Head>
 
         <Nav />
@@ -20,7 +20,6 @@ const Layout = ({ user, loading = false, children }) => (
                 <div className='font-medium'> {children} </div>
             </div>
         </main>
-        <script>hljs.highlightAll();</script>
     </UserProvider>
 );
 

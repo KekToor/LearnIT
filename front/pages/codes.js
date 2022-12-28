@@ -8,10 +8,10 @@ import {useFetchUser} from "../lib/authContext";
 const CodesList = ({ codes }) => {
     const { user, loading } = useFetchUser();
     const [pageIndex, setPageIndex] = useState(1);
-    const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=${pageIndex}&pagination[pageSize]=2`, fetcher, {fallbackData: codes});
+    const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=${pageIndex}&pagination[pageSize]=9`, fetcher, {fallbackData: codes});
     return (
         <Layout user={user}>
-            <h1 className="flex justify-center text-4xl md:text-5xl font-extrabold mb-6">
+            <h1 className="flex justify-center text-4xl md:text-5xl font-bold mb-6">
                 <span className="text-black dark:text-gray-200">
                     List kódů
                 </span>
@@ -66,7 +66,7 @@ const CodesList = ({ codes }) => {
 export default CodesList;
 
 export async function getStaticProps() {
-    const codesRes = await fetcher( `${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=1&pagination[pageSize]=2`);
+    const codesRes = await fetcher( `${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=1&pagination[pageSize]=9`);
     return{
         props: {
             codes: codesRes
