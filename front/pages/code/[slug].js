@@ -34,7 +34,7 @@ const Code = ({ code, jwt, guidetext }) => {
         e.preventDefault();
         const jwt = getTokenFromLocalCookie();
         try {
-            const resData = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/reviews`, {
+            await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/reviews`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
