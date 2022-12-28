@@ -85,11 +85,16 @@ const Code = ({ code, jwt, guidetext }) => {
             <hr className={"pt-2"}/>
             <div className={'font-normal'} dangerouslySetInnerHTML={{__html: guidetext}}></div>
 
+            <h2 className="text-3xl md:text-4xl font-bold leading-tight my-3">
+                Recenze
+            </h2>
+            <hr className={"pt-2"}/>
+            {!user && (
+                <div className={'font-medium'}>Pro zobrazení recenzí musíš být přihlášen.</div>
+            )}
             { user && (
                 <>
-                    <h2 className="text-3xl md:text-4xl font-bold leading-tight my-2">
-                        Recenze
-                    </h2>
+
                     <form onSubmit={handleSubmit}>
                         <span>Hodnocení: </span>
                         <Rating onClick={handleRating} SVGclassName="inline-block" className={"scale-75 pb-1"}/>
@@ -115,9 +120,8 @@ const Code = ({ code, jwt, guidetext }) => {
                                             <Rating initialValue={review.attributes.rating} readonly={true} className={"scale-75 pb-2"} SVGclassName={"inline-block"}/>
                                             <span className={"ml-auto pb-2 pr-5 align-middle"}>Vytvořeno {(review.attributes.createdAt).replace("T"," ").slice(0,-5)}</span>
                                         </div>
-
                                         <hr/>
-                                        <p className="p-3 font-light">{review.attributes.review}</p>
+                                        <div className="p-3 font-light">{review.attributes.review}</div>
                                     </li>
                                 )
                             })
