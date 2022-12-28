@@ -3,15 +3,12 @@ import {useEffect, useState} from "react";
 import {fetcher} from "../lib/api";
 import {setToken, unsetToken} from "../lib/auth";
 import {useUser} from "../lib/authContext";
-import {useRouter} from "next/router";
 
 const Nav = () => {
     const [data, setData] = useState({
         identifier: '',
         password: ''
     });
-
-    const router = useRouter();
 
     const [logo, setLogo] = useState('');
 
@@ -105,14 +102,14 @@ const Nav = () => {
                                                    placeholder="Heslo" className="p-2 form-input rounded mx-2 border dark:border-0 text-black"
                                                    required
                                             />
-                                          <button className="p-2 hover:text-gray-300 bg-blue-500 hover:bg-purple-500 rounded rounded-md text-white"
+                                          <button className="p-2 bg-blue-500 hover:bg-purple-500 rounded rounded-md text-white"
                                                   type="submit">
                                               Přihlásit se
                                           </button>
                                       </form>
                                   </li>
                                   <li>
-                                      <button className="p-2 hover:text-gray-300 bg-pink-400 hover:bg-purple-500 rounded rounded-md text-white">
+                                      <button className="p-2 bg-pink-400 hover:bg-purple-500 rounded rounded-md text-white">
                                           <Link href="/register">
                                               Zaregistrovat se
                                           </Link>
