@@ -32,4 +32,4 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 
 **27.12** - Stránky pro jednotlivé kódy, recenze, markdown konverze, zpracovávání dokumentace - 14h
 
-**28.12** - Registrace, Kalkulace hodnocení - 4h
+**28.12** - Registrace, Kalkulace hodnocení, zpracování dokumentace - 6h
