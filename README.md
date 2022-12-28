@@ -30,4 +30,6 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 
 **26.12** - Paginace, stránky pro jednotlivé kódy, implementace slugů - 3h30min
 
-**27.12** - Stránky pro jednotlivé kódy, recenze, markdown konverze - 8h
+**27.12** - Stránky pro jednotlivé kódy, recenze, markdown konverze, zpracovávání dokumentace - 14h
+
+**28.12** - Registrace - 2h
