@@ -4,7 +4,7 @@ Mnohokrát se každému z vás jistě stalo, že jste se chtěli vrátit k téma
 ## **Jednou a nikdy více!**
 Mým cílem je vyvtoření aplikace s databází, jejíž účelem bude vytvoření rozšiřitelné kolekce snadno srozumitelných a dohledatelných návodů - tutoriálů, roztříděných do skupin dle oboru, obtížnosti, u programování například jazyku, nebo také autora návodu! Návody bude také možné hodnotit, což jejich tvůrci poskytne zpětnou vazbu, která dále pomůže zvýšit jejich kvalitu.
 ## **Jaké technologie využiju?**
-Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bude zajišťovat získávání dat ze serveru a ***frontendu*** s využitím reactové knihovny **Next.js**; k dekoraci stránek bych se pak chtěl naučit *CSS framework* **Tailwind**.
+Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bude zajišťovat získávání dat ze serveru a ***frontendu*** s využitím reactového frameworku **Next.js**; k dekoraci stránek bych se pak chtěl naučit *CSS framework* **Tailwind**.
 ## **Harmonogram**
 **Září:** Výběr technologií
 
