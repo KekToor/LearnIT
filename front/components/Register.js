@@ -52,21 +52,21 @@ const Register = () => {
                             Uživatelské jméno
                         </label>
                         <input className={'border rounded text-black py-2 px-3'} type={"text"} name={"username"}
-                        onChange={(e) => handleChange(e)} required/>
+                        onChange={(e) => handleChange(e)} placeholder={"Vytvořte si jméno"} required/>
                     </div>
                     <div className={'flex flex-col mb-4'}>
                         <label className={'text-lg mb-2 font-bold leading-tight'} htmlFor={'email'}>
                             E-mailová adresa
                         </label>
                         <input className={'border rounded text-black py-2 px-3'} type={"email"} name={"email"}
-                               onChange={(e) => handleChange(e)} required/>
+                               onChange={(e) => handleChange(e)} placeholder={"Vaše e-mailová adresa"} required/>
                     </div>
                     <div className={'flex flex-col mb-4'}>
                         <label className={'text-lg mb-2 font-bold leading-tight'} htmlFor={'password'}>
                             Heslo
                         </label>
                         <input className={'border rounded text-black py-2 px-3'} type={"password"} name={"password"}
-                               onChange={(e) => handleChange(e)} required/>
+                               onChange={(e) => handleChange(e)} placeholder={"Zvolte heslo"} required/>
                     </div>
                     <button className={"bg-blue-500 hover:bg-purple-600 font-medium p-3 rounded rounded-md text-white" +
                         " mt-5 mx-auto md:mx-3 transiton-all ease-in-out bg-gradient-to-br from-purple-800 via purple-400 to-pink-400 bg-size-200" +

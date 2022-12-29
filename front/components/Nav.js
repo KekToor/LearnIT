@@ -10,8 +10,8 @@ const Nav = () => {
         password: ''
     });
 
+    const [navbarOpen, setNavbarOpen] = useState(false);
     const [logo, setLogo] = useState('');
-
     const { user, loading } = useUser();
 
     const handleSubmit = async (e) => {
@@ -40,6 +40,9 @@ const Nav = () => {
 
     useEffect(() => {
         const logo = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        window.matchMedia("(min-width: 768px)").addEventListener('change', event => {
+            event.matches ? setNavbarOpen(false) : '';
+        });
         console.log(logo);
         setLogo(logo);
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
@@ -55,9 +58,20 @@ const Nav = () => {
                       <img className="m-3" src={`${logo === 'dark' ? '/learnit-light.png' : '/learnit.png'}`} width={159} height={50} alt="LearnIT Logo" />
                   </Link>
               </div>
-
-              <div className="hidden w-full md:flex md:items-center md:w-auto" id="menu">
-                  <ul className="pt-2 text-base text-black dark:text-gray-200 md:flex md:justify-between md: pt-0 space-x-2">
+              <button type="button"
+                      className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                      aria-controls="navbar-default" aria-expanded="false"
+              onClick={() => setNavbarOpen(!navbarOpen)}>
+                  <span className="sr-only">Open main menu</span>
+                  <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                       xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                            clipRule="evenodd"></path>
+                  </svg>
+              </button>
+              <div className={`${navbarOpen ? "flex flex-col justify-between mx-2" : "hidden"} w-full md:flex md:items-center md:w-auto`} id="menu">
+                  <ul className={`pt-2 text-base text-black dark:text-gray-200 md:flex md:justify-between md: pt-0 ${navbarOpen ? "space-x-0" : "space-x-2"}`}>
                     <li>
                         <Link className="py-2 px-1 block hover:text-gray-300" href="/">
                             Domů
@@ -81,7 +95,9 @@ const Nav = () => {
                       {!loading &&
                           (user ? (
                                   <li>
-                                      <button className="p-2 ml-2 hover:text-gray-300 bg-pink-400 hover:bg-purple-500 rounded rounded-md text-white"
+                                      <button className={"p-2 ml-2 rounded rounded-md text-white" +
+                                          " bg-gradient-to-r from-pink-700 to-pink-500 bg-size-200" +
+                                          " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}
                                               onClick={logout}>
                                           Odhlásit se
                                       </button>
@@ -94,22 +110,28 @@ const Nav = () => {
                               <>
                                   <li>
                                       <form onSubmit={handleSubmit} className="form-inline">
+                                          <div className={`${navbarOpen ? "flex flex-col space-y-2" : "space-x-4"}`}>
                                             <input type="text" name="identifier" onChange={handleChange}
-                                               placeholder="Uživatelské jméno" className="p-2 form-input rounded mx-2 border dark:border-0 text-black"
+                                               placeholder="Uživatelské jméno" className={`p-2 form-input rounded border dark:border-0 text-black`}
                                                required
                                             />
                                             <input type="password" name="password" onChange={handleChange}
-                                                   placeholder="Heslo" className="p-2 form-input rounded mx-2 border dark:border-0 text-black"
+                                                   placeholder="Heslo" className="p-2 form-input rounded border dark:border-0 text-black"
                                                    required
                                             />
-                                          <button className="p-2 bg-blue-500 hover:bg-purple-500 rounded rounded-md text-white"
+                                          <button className={`p-2 rounded rounded-md text-white ` +
+                                              "bg-gradient-to-r from-sky-700 to-sky-500 bg-size-200" +
+                                              " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}
                                                   type="submit">
                                               Přihlásit se
                                           </button>
+                                          </div>
                                       </form>
                                   </li>
                                   <li>
-                                      <button className="p-2 bg-pink-400 hover:bg-purple-500 rounded rounded-md text-white">
+                                      <button className={`p-2 ${navbarOpen ? "w-full mt-2" : ""} rounded rounded-md text-white ` +
+                                          "bg-gradient-to-r from-pink-700 to-pink-500 bg-size-200" +
+                                          " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}>
                                           <Link href="/register">
                                               Zaregistrovat se
                                           </Link>

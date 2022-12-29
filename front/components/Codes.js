@@ -23,7 +23,7 @@ const Codes = ({ codes }) => {
                         return (
                             <li className="border rounded-md p-2" key={code.id}>
                                 <div className={"flex flex-wrap items-center"}>
-                                    <h1 className='text-2xl md:text-3xl font-bold leading-tight pl-1 hover:text-slate-300'>
+                                    <h1 className='text-2xl md:text-3xl font-bold leading-tight pl-1 hover:text-sky-400'>
                                         <Link href={'code/' + code.attributes.slug}>{code.attributes.title}</Link>
                                     </h1>
                                     <div className={`text-xl md:text-2xl text-white ml-auto mb-2 p-3 rounded-md ${code.attributes.difficulty < 6 ?

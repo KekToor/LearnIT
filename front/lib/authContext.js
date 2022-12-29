@@ -33,11 +33,13 @@ export const useFetchUser = () => {
 
         let isMounted = true;
 
-        const user = getUserFromLocalCookie();
-        if(isMounted) {
-            setUser({user, loading: false});
-        }
-
+        const resolveUser = async() => {
+            const user = await getUserFromLocalCookie();
+            if(isMounted) {
+                setUser({user, loading: false});
+            }
+        };
+        resolveUser();
         return () => {
             isMounted = false;
         };
