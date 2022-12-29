@@ -68,6 +68,10 @@
       "relation": "oneToMany",
       "target": "api::code.code",
       "mappedBy": "users_permissions_user"
+    },
+    "avatar": {
+      "type": "string",
+      "default": "default_avatar"
     }
   }
 }

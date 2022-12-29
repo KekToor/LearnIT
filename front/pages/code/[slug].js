@@ -32,7 +32,6 @@ const Code = ({ code, jwt, guidetext, error}) => {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const jwt = getTokenFromLocalCookie();
         try {
             await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/reviews`, {
                 method: 'POST',
@@ -44,7 +43,7 @@ const Code = ({ code, jwt, guidetext, error}) => {
                     data: {
                         review: review.value,
                         rating: rating.rating,
-                        reviewer: getUserFromLocalCookie(),
+                        reviewer: await getUserFromLocalCookie(),
                         code: code.id
                     }
                 })
@@ -84,10 +83,13 @@ const Code = ({ code, jwt, guidetext, error}) => {
                         Programovací jazyk: <strong>{code.attributes.language}</strong>
                     </div>
                     <div className={"ml-auto"}>
-                        Vytvořeno uživatelem<strong>&nbsp;{code.attributes.author}</strong>
-                        <i>{(code.attributes.createdAt).replace("T", " ").slice(0, -5)}</i>
+                        Vytvořeno uživatelem<strong>&nbsp;{code.attributes.author}</strong>&nbsp;
+                        <i>{(code.attributes.createdAt).replace("T", " ").slice(0, -5)}</i>,
+                        naposledy upraveno&nbsp;
+                        <i>{(code.attributes.updatedAt).replace("T", " ").slice(0, -5)}</i>
                     </div>
                 </div>
+
                 <hr className={"pt-2"}/>
                 <div className="text-lg">
                     {code.attributes.desc}

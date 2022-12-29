@@ -73,12 +73,12 @@ const Nav = () => {
               <div className={`${navbarOpen ? "flex flex-col justify-between mx-2" : "hidden"} w-full md:flex md:items-center md:w-auto`} id="menu">
                   <ul className={`pt-2 text-base text-black dark:text-gray-200 md:flex md:justify-between md: pt-0 ${navbarOpen ? "space-x-0" : "space-x-2"}`}>
                     <li>
-                        <Link className="py-2 px-1 block hover:text-gray-300" href="/">
+                        <Link className="py-2 px-1 block hover:text-gray-300 transition-all duration-500 ease-in-out hover:underline hover:underline-offset-2" href="/">
                             Domů
                         </Link>
                     </li>
                     <li>
-                        <Link href="/codes" className="py-2 px-1 block hover:text-gray-300">
+                        <Link href="/codes" className="py-2 px-1 block hover:text-gray-300 transition-all duration-500 ease-in-out hover:underline hover:underline-offset-2">
                             List Kódů
                         </Link>
                     </li>
