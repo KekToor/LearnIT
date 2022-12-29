@@ -48,7 +48,7 @@ const Nav = () => {
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
             const logo = event.matches ? 'dark' : 'light';
             setLogo(logo);
-        })
+        });
         }, []);
 
     return (

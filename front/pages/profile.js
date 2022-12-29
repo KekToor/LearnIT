@@ -1,9 +1,10 @@
 import Layout from "../components/Layout";
 import {useFetchUser} from "../lib/authContext";
-import {getTokenFromServerCookie} from "../lib/auth";
+import {getIdFromLocalCookie, getTokenFromServerCookie} from "../lib/auth";
 import {fetcher} from "../lib/api";
 import {headers} from "next/headers";
 import {useState} from "react";
+import Image from "next/image";
 
 
 const Profile = ({ avatar }) => {
@@ -21,7 +22,7 @@ const Profile = ({ avatar }) => {
         const formData = new FormData();
         const file = image;
         formData.append('inputFile', file);
-        formData.append('user_id', '')
+        formData.append('user_id', await getIdFromLocalCookie())
         try {
 
         } catch (error){
@@ -49,6 +50,12 @@ const Profile = ({ avatar }) => {
                     </button>
                 </div>
             )}
+            {avatar && (
+                <>
+                    <Image src={`${avatar !== 'default_avatar' ? (process.env.NEXT_PUBLIC_MEDIA_URL + avatar.url) : '/default_avatar.png'}`} alt={'Profilový obrázek'} width={100} height={100}/>
+                    <div>Upload</div>
+                </>
+            )}
         </Layout>
     );
 }
@@ -62,12 +69,12 @@ export async function getServerSideProps({req}){
             }
         }
     } else {
-        const res = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/users/me`, {
+        const res = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/users/me?populate=avatar_img`, {
             headers: {
                 Authorization: `Bearer ${jwt}`,
             },
             });
-        const avatar = res.avatar ? res.avatar : 'default_avatar';
+        const avatar = res.avatar_img ? res.avatar_img : 'default_avatar';
         return {
             props: {
                 avatar,

@@ -30,6 +30,9 @@
     "reviewer": {
       "type": "string",
       "required": true
+    },
+    "reviewer_id": {
+      "type": "integer"
     }
   }
 }

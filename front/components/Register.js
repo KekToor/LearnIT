@@ -1,10 +1,8 @@
-import {useRouter} from "next/router";
 import {useState} from "react";
 import {setToken} from "../lib/auth";
 import {fetcher} from "../lib/api";
 
 const Register = () => {
-    const router = useRouter();
     const [userData, setUserData] = useState({
         username: '',
         email: '',
@@ -27,7 +25,6 @@ const Register = () => {
                     method: 'POST'
                 });
             setToken(resData);
-            await router.push('/profile');
         } catch (error) {
             console.error(error);
         }

@@ -1,7 +1,12 @@
 import {fetcher} from "../../lib/api";
 import Layout from "../../components/Layout";
 import {useFetchUser} from "../../lib/authContext";
-import {getTokenFromLocalCookie, getTokenFromServerCookie, getUserFromLocalCookie} from "../../lib/auth";
+import {
+    getIdFromLocalCookie,
+    getTokenFromLocalCookie,
+    getTokenFromServerCookie,
+    getUserFromLocalCookie
+} from "../../lib/auth";
 import {useRouter} from "next/router";
 import {useState} from "react";
 import {Rating} from "react-simple-star-rating";
@@ -44,6 +49,7 @@ const Code = ({ code, jwt, guidetext, error}) => {
                         review: review.value,
                         rating: rating.rating,
                         reviewer: await getUserFromLocalCookie(),
+                        reviewer_id: await getIdFromLocalCookie(),
                         code: code.id
                     }
                 })
