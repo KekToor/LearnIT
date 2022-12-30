@@ -7,8 +7,10 @@ import {useFetchUser} from "../lib/authContext";
 
 const CodesList = ({ codes }) => {
     const { user, loading } = useFetchUser();
+    const [searchData, setSearchData] = useState('');
+    console.log(searchData)
     const [pageIndex, setPageIndex] = useState(1);
-    const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=${pageIndex}&pagination[pageSize]=9&populate=reviews`, fetcher, {fallbackData: codes});
+    const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=${pageIndex}&pagination[pageSize]=9&populate=reviews&filters[title][$contains]=${searchData}`, fetcher, {fallbackData: codes});
     return (
         <Layout user={user}>
             <h1 className="flex justify-center text-4xl md:text-5xl font-bold mb-6">

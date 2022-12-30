@@ -74,11 +74,15 @@
       "default": "default_avatar"
     },
     "avatar_img": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos",
+        "audios",
+        "files"
+      ]
     }
   }
 }

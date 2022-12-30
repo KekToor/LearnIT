@@ -1,15 +1,23 @@
 import Layout from "../components/Layout";
 import {useFetchUser} from "../lib/authContext";
-import {getIdFromLocalCookie, getTokenFromServerCookie} from "../lib/auth";
+import {
+    getIdFromLocalCookie,
+    getTokenFromLocalCookie,
+    getTokenFromServerCookie,
+    getUserFromLocalCookie
+} from "../lib/auth";
 import {fetcher} from "../lib/api";
 import {headers} from "next/headers";
 import {useState} from "react";
 import Image from "next/image";
+import {useRouter} from "next/router";
 
 
 const Profile = ({ avatar }) => {
     const {user, loading} = useFetchUser();
-    const {image, setImage} = useState(null);
+    const [image, setImage] = useState(null);
+    const router = useRouter();
+    console.log(avatar);
 
     const uploadToClient = (event) => {
         if (event.target.files && event.target.files[0]){
@@ -18,17 +26,28 @@ const Profile = ({ avatar }) => {
         }
     };
 
-    const uploadToServer = async () => {
+    const uploadToServer = async (e) => {
         const formData = new FormData();
-        const file = image;
-        formData.append('inputFile', file);
-        formData.append('user_id', await getIdFromLocalCookie())
+        await formData.append('files', image);
+        await formData.append("ref", "plugin::users-permissions.user");
+        await formData.append("refId", "1");
+        await formData.append("field", "avatar_img");
+        await console.log(formData.get('field'));
+        const jwt = getTokenFromLocalCookie();
+        console.log(image)
+        e.preventDefault();
         try {
-
-        } catch (error){
-            console.error(JSON.stringify(error));
+            await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/upload`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+                body: formData
+            });
+            router.reload();
+        } catch (error) {
+            console.error('error', error);
         }
-
     };
 
     return(
@@ -52,7 +71,7 @@ const Profile = ({ avatar }) => {
             )}
             {avatar && (
                 <>
-                    <Image src={`${avatar !== 'default_avatar' ? (process.env.NEXT_PUBLIC_MEDIA_URL + avatar.url) : '/default_avatar.png'}`} alt={'Profilový obrázek'} width={100} height={100}/>
+                    <Image src={`${avatar !== 'default_avatar' ? (process.env.NEXT_PUBLIC_MEDIA_URL + avatar.url) : '/default_avatar.png'}`} alt={'Profilový obrázek'} width={100} height={100} className={"rounded-3xl"}/>
                     <div>Upload</div>
                 </>
             )}

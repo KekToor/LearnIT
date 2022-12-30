@@ -118,12 +118,14 @@ const Code = ({ code, jwt, guidetext, error}) => {
                             <span>Hodnocení: </span>
                             <Rating onClick={handleRating} SVGclassName="inline-block" className={"scale-75 pb-1"}/>
                             <textarea
-                                className="flex w-full lg:w-2/5 md:w-3/5 sm:w-4/5 text-sm px-3 py-2 text-black border rounded-lg focus:outline-none"
+                                className="flex w-full lg:w-2/5 md:w-3/5 sm:w-4/5 text-sm px-3 py-2 text-black border rounded-lg focus:outline-none dark:bg-slate-700 dark:bg-opacity-50 dark:text-white"
                                 rows="4" value={review.value} onChange={handleChange}
                                 placeholder="Přidejde Vaši recenzi">
                         </textarea>
                             <button
-                                className="p-2 my-2 hover:text-gray-300 bg-pink-400 hover:bg-purple-500 rounded rounded-md text-white"
+                                className={`mt-2  p-2 rounded rounded-md text-white ` +
+                                    "bg-gradient-to-r from-sky-700 to-sky-500 bg-size-200" +
+                                    " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}
                                 type="submit">
                                 Přidat recenzi
                             </button>
@@ -133,17 +135,31 @@ const Code = ({ code, jwt, guidetext, error}) => {
                                 (
                                     <span>Žádné recenze. Buďte první kdo tuto ukázku zhodnotí!</span>
                                 )}
+                            {code.attributes.reviews && (
+                                <h2 className="text-3xl md:text-4xl font-bold leading-tight my-3">
+                                    Uživatelské recenze ({code.attributes.reviews.total})
+                                </h2>
+                            )
+
+                            }
+
                             {code.attributes.reviews &&
                                 code.attributes.reviews.data.map((review) => {
                                     return (
-                                        <li key={review.id} className="w-full sm:w-4/5 border rounded-lg pt-2 my-3">
-                                            <div className={"flex flex-wrap items-center"}>
-                                                <span
-                                                    className={"font-bold pl-7 pb-1 text-lg"}>{review.attributes.reviewer}</span>
-                                                <Rating initialValue={review.attributes.rating} readonly={true}
-                                                        className={"scale-75 pb-2"} SVGclassName={"inline-block"}/>
-                                                <span
-                                                    className={"ml-auto pb-2 pr-5 align-middle"}>Vytvořeno {(review.attributes.createdAt).replace("T", " ").slice(0, -5)}</span>
+                                        <li key={review.id} className="w-full sm:w-4/5 border rounded-lg py-2 my-3">
+                                            <div className={"flex grid grid-cols-6 flex-wrap items-center"}>
+                                                <div className={"col-span-1"}>
+                                                    <span
+                                                        className={"font-bold pl-7 pb-1 text-lg"}>{review.attributes.reviewer}</span>
+                                                </div>
+                                                <div className={"col-span-1"}>
+                                                    <Rating initialValue={review.attributes.rating} readonly={true}
+                                                            className={"scale-75 pb-2"} SVGclassName={"inline-block"}/>
+                                                </div>
+                                                <div className={"col-span-4 ml-auto"}>
+                                                    <span
+                                                        className={"ml-auto pb-2 pr-5 align-middle"}>Vytvořeno {(review.attributes.createdAt).replace("T", " ").slice(0, -5)}</span>
+                                                </div>
                                             </div>
                                             <hr/>
                                             <div className="p-3 font-light">{review.attributes.review}</div>

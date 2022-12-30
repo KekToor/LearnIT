@@ -8,6 +8,9 @@ const Codes = ({ codes }) => {
     return (
         <>
             <ul className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2 list-none text-md mb-2">
+                {!codes && (
+                    <h2 className={"text-3xl md:text-4xl font-bold leading-tight text-center my-3"}>Vašemu vyhledávání nevyhovuje žádný záznam.</h2>
+                )}
                 {codes &&
                     codes.data.map((code) => {
                         total = 0;
