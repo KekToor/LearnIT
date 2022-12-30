@@ -35,3 +35,5 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 **28.12** - Registrace, Kalkulace hodnocení, zpracování dokumentace - 6h
 
 **29.12** - Vylepšení zabezpečení, zlepšení responzivity, oprava recenzí, základ profilové stránky, zobrazení profilových obrázků - 10h
+
+**30.12** - Nahrávání profilových obrázků - 9h
