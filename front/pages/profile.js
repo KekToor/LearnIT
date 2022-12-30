@@ -30,11 +30,9 @@ const Profile = ({ avatar }) => {
         const formData = new FormData();
         await formData.append('files', image);
         await formData.append("ref", "plugin::users-permissions.user");
-        await formData.append("refId", "1");
+        await formData.append("refId", await getIdFromLocalCookie());
         await formData.append("field", "avatar_img");
-        await console.log(formData.get('field'));
         const jwt = getTokenFromLocalCookie();
-        console.log(image)
         e.preventDefault();
         try {
             await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/upload`, {
