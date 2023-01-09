@@ -37,3 +37,5 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 **29.12** - Vylepšení zabezpečení, zlepšení responzivity, oprava recenzí, základ profilové stránky, zobrazení profilových obrázků - 10h
 
 **30.12** - Nahrávání profilových obrázků - 9h
+
+**9.11** - Přídání Markdown editoru Quill, zpracovávání dokumentace - 8h
