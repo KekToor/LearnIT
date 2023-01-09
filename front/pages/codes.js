@@ -13,12 +13,8 @@ const CodesList = ({ codes }) => {
     const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes?pagination[page]=${pageIndex}&pagination[pageSize]=9&populate=reviews&filters[title][$contains]=${searchData}`, fetcher, {fallbackData: codes});
     return (
         <Layout user={user}>
-            <h1 className="flex justify-center text-4xl md:text-5xl font-bold mb-6">
-                <span className="text-black dark:text-gray-200">
-                    List kódů
-                </span>
-
-            </h1>
+            <h1 className='text-3xl md:text-5xl font-bold leading-tight mb-3 text-center md:text-left'>List kódů</h1>
+            <hr className={"pt-2"}/>
             <div className="text-left">
                 <Codes codes={data}/>
                 <div className='space-x-2 space-y-2'>

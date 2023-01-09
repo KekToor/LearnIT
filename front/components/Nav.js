@@ -129,13 +129,15 @@ const Nav = () => {
                                       </form>
                                   </li>
                                   <li>
-                                      <button className={`p-2 ${navbarOpen ? "w-full mt-2" : ""} rounded rounded-md text-white ` +
-                                          "bg-gradient-to-r from-pink-700 to-pink-500 bg-size-200" +
-                                          " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}>
-                                          <Link href="/register">
-                                              Zaregistrovat se
-                                          </Link>
-                                      </button>
+                                      <Link href="/register">
+                                          <button className={`p-2 ${navbarOpen ? "w-full mt-2" : ""} rounded rounded-md text-white ` +
+                                              "bg-gradient-to-r from-pink-700 to-pink-500 bg-size-200" +
+                                              " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}>
+
+                                                  Zaregistrovat se
+
+                                          </button>
+                                      </Link>
                                   </li>
                               </>
                               ) : ('')

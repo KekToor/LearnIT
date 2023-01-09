@@ -137,7 +137,7 @@ const Code = ({ code, jwt, guidetext, error}) => {
                                 )}
                             {code.attributes.reviews && (
                                 <h2 className="text-3xl md:text-4xl font-bold leading-tight my-3">
-                                    Uživatelské recenze ({code.attributes.reviews.total})
+                                    Uživatelské recenze ({code.attributes.reviews.data.length})
                                 </h2>
                             )
 
