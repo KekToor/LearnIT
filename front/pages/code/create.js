@@ -8,7 +8,12 @@ const CreateCode = () => {
 
     return (
         <Layout user={user}>
-            <Create/>
+            {!loading && (
+                user && (
+                    <Create/>
+                )
+            )}
+            {/*<Create2/>*/}
         </Layout>
     );
 }

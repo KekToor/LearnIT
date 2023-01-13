@@ -7,24 +7,9 @@ const Codes = ({ codes }) => {
 
     return (
         <>
-            <ul className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 list-none text-md mb-2">
-                {!codes && (
+            <ul className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 list-none text-md mt-4 mb-2">
+                {codes.data.length === 0 && (
                     <h2 className={"text-3xl md:text-4xl font-bold leading-tight text-center my-3"}>Vašemu vyhledávání nevyhovuje žádný záznam.</h2>
-                )}
-                {codes && (
-                    <>
-                        <div className={'col-span-1 lg:col-span-2 xl:col-span-3 ml-auto'}>
-                            <Link href={'/code/create'}>
-                                <button className={`p-2 rounded rounded-md text-white my-3 ` +
-                                    "bg-gradient-to-r from-purple-500 to-pink-500 bg-size-200" +
-                                    " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}>
-
-                                        + Vytvořit záznam
-                                </button>
-                            </Link>
-                        </div>
-                    </>
-
                 )}
                 {codes &&
                     codes.data.map((code) => {
