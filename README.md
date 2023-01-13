@@ -39,3 +39,5 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 **30.12** - Nahrávání profilových obrázků - 9h
 
 **9.11** - Přídání Markdown editoru Quill, zpracovávání dokumentace - 8h
+
+**13.1** - Vyhledávání tutoriálů, formulář pro tvorbu nových tutoriálů
