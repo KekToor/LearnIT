@@ -1,5 +1,7 @@
-import { useState, useMemo } from "react";
+import {useState, useMemo, useRef, useEffect} from "react";
 import dynamic from "next/dynamic";
+import hljs from "highlight.js";
+import 'highlight.js/styles/monokai.css'
 import 'react-quill/dist/quill.snow.css'
 import 'react-quill/dist/quill.bubble.css'
 import 'react-quill/dist/quill.core.css'
@@ -10,10 +12,10 @@ import TurndownService from "turndown";
 const Create = () => {
     const [codeFile, setCodeFile] = useState();
     const td = new TurndownService();
-    td.addRule('code', {
-        filter: 'code',
+    td.addRule('pre', {
+        filter: 'pre',
         replacement: function (content) {
-            return '```\n' + content + '\n```';
+            return '```\n' + content + '```';
         }
     });
 
@@ -54,16 +56,17 @@ const Create = () => {
         toolbar: [
             [{ 'header': [1, 2, false] }],
             ['bold', 'italic', 'underline','strike', 'blockquote'],
-            ['code'],
+            ['code-block'],
             [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
             ['link'],
             ['clean']
         ],
     }
+
     const formats = [
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'code',
+        'code-block',
         'list', 'bullet', 'indent',
         'link'
     ]
@@ -123,6 +126,10 @@ const Create = () => {
             console.error('error', error);
         }
     }
+
+    useEffect(() => {
+        hljs.highlightAll();
+    })
 
     return (
         <>
