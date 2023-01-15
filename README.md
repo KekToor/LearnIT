@@ -40,4 +40,8 @@ Mým plánem je využít backendového, no-hearer CMS systému Strapi, který bu
 
 **9.11** - Přídání Markdown editoru Quill, zpracovávání dokumentace - 8h
 
-**13.1** - Vyhledávání tutoriálů, formulář pro tvorbu nových tutoriálů
+**13.1** - Vyhledávání tutoriálů, formulář pro tvorbu nových tutoriálů - 6h30min
+
+**14.1** - Vylepšení formuláře pro tvorbu tutoriálů - 4h
+
+**15.1** - Formulář pro úpravu kódů, profilový obrázek v navbaru - 4h
