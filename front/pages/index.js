@@ -7,6 +7,9 @@ export default function Home() {
         <Layout user={user}>
             <h1 className='text-3xl md:text-5xl font-bold leading-tight mb-3 text-center md:text-left'>Vítejte na výukovém portálu LearnIT!</h1>
             <hr className={"pt-2"}/>
+            <p className={'text-lg'}>
+                Learnit je
+            </p>
         </Layout>
     );
 }

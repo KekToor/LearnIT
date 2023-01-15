@@ -1,6 +1,9 @@
 import Link from "next/link";
+import {useFetchUser} from "../lib/authContext";
+import Image from "next/image";
 
 const Codes = ({ codes }) => {
+    const { user, loading } = useFetchUser();
 
     let total = 0;
     let count = 0;
@@ -50,6 +53,17 @@ const Codes = ({ codes }) => {
                                 </div>
                                 <hr/>
                                 <p className="font-normal text-justify">{code.attributes.desc}</p>
+                                {user === code.attributes.author && (
+                                    <>
+                                        <div className={"flex flex-wrap items-center w-full mb-2 font-normal"}>
+                                            <div className={"ml-auto"}>
+                                                <Link href={'code/edit/' + code.attributes.slug}>
+                                                    <Image src={'/edit.png'} alt={'Edit button'} className={'bg-white rounded-md mr-1 hover:bg-sky-400'} width={25} height={25}/>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </li>
                         );
                     })

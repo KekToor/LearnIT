@@ -11,7 +11,6 @@ const CodesList = ({ codes }) => {
     const [searchData, setSearchData] = useState({
         result: ''
     });
-    console.log(searchData)
     const [pageIndex, setPageIndex] = useState(1);
 
     const handleChange = (e) => {

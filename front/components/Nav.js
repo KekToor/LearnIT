@@ -1,8 +1,13 @@
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {fetcher} from "../lib/api";
-import {setToken, unsetToken} from "../lib/auth";
+import {
+    getTokenFromLocalCookie,
+    setToken,
+    unsetToken
+} from "../lib/auth";
 import {useUser} from "../lib/authContext";
+import Image from "next/image";
 
 const Nav = () => {
     const [data, setData] = useState({
@@ -13,6 +18,16 @@ const Nav = () => {
     const [navbarOpen, setNavbarOpen] = useState(false);
     const [logo, setLogo] = useState('');
     const { user, loading } = useUser();
+
+    const fetchAvatar = async () => {
+        const res = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/users/me?populate=avatar_img`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${getTokenFromLocalCookie()}`,
+            },
+        });
+        return res.avatar_img ? res.avatar_img.url : 'default_avatar';
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,12 +53,20 @@ const Nav = () => {
         unsetToken();
     };
 
+    const [avatar, setAvatar] = useState('');
+
     useEffect(() => {
+        (async()=>{
+            const a = await fetchAvatar();
+            setAvatar(a);
+        })()
+
         const logo = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
         window.matchMedia("(min-width: 768px)").addEventListener('change', event => {
             event.matches ? setNavbarOpen(false) : '';
         });
         console.log(logo);
+        console.log(avatar + 'cccs');
         setLogo(logo);
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
             const logo = event.matches ? 'dark' : 'light';
@@ -84,18 +107,31 @@ const Nav = () => {
                     </li>
                       {!loading &&
                           (user ? (
-                              <li>
-                                  <Link href="/profile" className="py-2 px-1 block hover:text-gray-300">
-                                        Profil
+                              <>
+                                  <Link href="/profile" className={'flex flex-row space-x-1 my-2 md:my-0 w-3/12 md:w-auto pr-2 rounded-lg border hover:bg-gradient-to-br from-sky-400 to-sky-900 duration-200'}>
+                                      <li>
+                                          <div className="py-1 pr-1 block hover:text-gray-300">
+                                              <Image src={`${avatar !== 'default_avatar' ? (process.env.NEXT_PUBLIC_MEDIA_URL + avatar)
+                                                  : '/default_avatar.png'}`} alt={'Profilový obrázek'} width={30} height={30}
+                                                     className={"rounded-xl ml-3"}/>
+                                          </div>
+                                      </li>
+                                      <li className={''}>
+                                          <div className="py-1.5 pr-1 block hover:text-gray-300">
+                                              <div>
+                                                  {user}
+                                              </div>
+                                          </div>
+                                      </li>
                                   </Link>
-                              </li>
+                              </>
                           ) : ('')
                           )
                       }
                       {!loading &&
                           (user ? (
                                   <li>
-                                      <button className={"p-2 ml-2 rounded rounded-md text-white" +
+                                      <button className={"p-2 ml-0 mt-1 md:mt-0 md:ml-2 rounded rounded-md text-white" +
                                           " bg-gradient-to-r from-pink-700 to-pink-500 bg-size-200" +
                                           " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}
                                               onClick={logout}>

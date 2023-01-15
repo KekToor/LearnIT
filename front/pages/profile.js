@@ -3,11 +3,9 @@ import {useFetchUser} from "../lib/authContext";
 import {
     getIdFromLocalCookie,
     getTokenFromLocalCookie,
-    getTokenFromServerCookie,
-    getUserFromLocalCookie
+    getTokenFromServerCookie
 } from "../lib/auth";
 import {fetcher} from "../lib/api";
-import {headers} from "next/headers";
 import {useState} from "react";
 import Image from "next/image";
 import {useRouter} from "next/router";
@@ -69,8 +67,10 @@ const Profile = ({ avatar }) => {
             )}
             {avatar && (
                 <>
-                    <Image src={`${avatar !== 'default_avatar' ? (process.env.NEXT_PUBLIC_MEDIA_URL + avatar.url) : '/default_avatar.png'}`} alt={'Profilový obrázek'} width={100} height={100} className={"rounded-3xl"}/>
-                    <div>Upload</div>
+                    <Image src={`${avatar !== 'default_avatar' ? (process.env.NEXT_PUBLIC_MEDIA_URL + avatar.url)
+                        : '/default_avatar.png'}`} alt={'Profilový obrázek'} width={100} height={100}
+                           className={"rounded-3xl ml-3"}/>
+                    <div className={''}>Profilový obrázek</div>
                 </>
             )}
         </Layout>

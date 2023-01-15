@@ -13,7 +13,6 @@ const CreateCode = () => {
                     <Create/>
                 )
             )}
-            {/*<Create2/>*/}
         </Layout>
     );
 }

@@ -123,7 +123,7 @@ const Code = ({ code, jwt, guidetext, error}) => {
                                 placeholder="Přidejde Vaši recenzi">
                         </textarea>
                             <button
-                                className={`mt-2  p-2 rounded rounded-md text-white ` +
+                                className={`mt-2 mb-4  p-2 rounded rounded-md text-white ` +
                                     "bg-gradient-to-r from-sky-700 to-sky-500 bg-size-200" +
                                     " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}
                                 type="submit">

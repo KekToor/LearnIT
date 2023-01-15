@@ -1,4 +1,4 @@
-import {useState, useMemo, useRef, useEffect} from "react";
+import {useState, useMemo, useEffect} from "react";
 import dynamic from "next/dynamic";
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai.css'
@@ -8,6 +8,7 @@ import 'react-quill/dist/quill.core.css'
 import {getTokenFromLocalCookie, getUserFromLocalCookie} from "../lib/auth";
 import {fetcher} from "../lib/api";
 import TurndownService from "turndown";
+import Router from "next/router";
 
 const Create = () => {
     const [codeFile, setCodeFile] = useState();
@@ -50,6 +51,7 @@ const Create = () => {
         {value: 'NoSQL',label: 'NoSQL'},
         {value: 'Rust',label: 'Rust'},
         {value: 'Perl',label: 'Perl'},
+        {value: 'TěškoviC', label: 'TěškoviC'}
     ];
 
     const modules = {
@@ -71,13 +73,6 @@ const Create = () => {
         'link'
     ]
 
-    const uploadToClient = (event) => {
-        if (event.target.files && event.target.files[0]){
-            const tempFile = event.target.files[0];
-            setCodeFile(tempFile);
-        }
-    };
-
     const handleChange = (e) => {
         console.log(e);
         console.log(e.target);
@@ -94,16 +89,9 @@ const Create = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData;
-        await formData.append('title', codeData.title);
-        await formData.append('desc', codeData.desc);
-        await formData.append('language', codeData.language);
-        await formData.append('difficulty', codeData.difficulty);
-        await formData.append('author', await getUserFromLocalCookie());
-        await formData.append('guidetext', text);
         const jwt = getTokenFromLocalCookie();
         try {
-            await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes`, {
+            const resData = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${jwt}`,
@@ -122,6 +110,7 @@ const Create = () => {
                     }
                 )
             })
+            Router.push(`/code/${resData.data.attributes.slug}`);
         } catch (error) {
             console.error('error', error);
         }
