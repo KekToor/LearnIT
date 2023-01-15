@@ -60,13 +60,10 @@ const Nav = () => {
             await fetchAvatar().then(res => {
             setAvatar(res)})
         })()
-
-        const logo = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        const logo = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         window.matchMedia("(min-width: 768px)").addEventListener('change', event => {
             event.matches ? setNavbarOpen(false) : '';
         });
-        console.log(logo);
-        console.log(avatar + 'cccs');
         setLogo(logo);
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
             const logo = event.matches ? 'dark' : 'light';
@@ -113,10 +110,10 @@ const Nav = () => {
                                             <>
                                                 <Link href="/profile" className={'flex flex-row space-x-1 my-2 md:my-0 w-3/12 md:w-auto pr-2 rounded-lg border hover:bg-gradient-to-br from-sky-400 to-sky-900 duration-200'}>
                                                     <li>
-                                                        <div className="py-1 pr-1 block hover:text-gray-300">
+                                                        <div className=" pr-1 block hover:text-gray-300">
                                                             <Image src={`${avatar !== 'default_avatar' ? (process.env.NEXT_PUBLIC_MEDIA_URL + avatar)
-                                                                : '/default_avatar.png'}`} alt={'Profilový obrázek'} width={30} height={30}
-                                                                   className={"rounded-xl ml-3"}/>
+                                                                : '/default_avatar.png'}`} alt={'Profilový obrázek'} width={26} height={26}
+                                                                   className={"rounded-xl ml-3 w-auto"}/>
                                                         </div>
                                                     </li>
                                                     <li className={''}>

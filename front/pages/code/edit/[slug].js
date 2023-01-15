@@ -173,7 +173,7 @@ const Edit = ({code, jwt, guidetext, slug, error}) => {
                                     "bg-gradient-to-r from-sky-700 to-sky-500 bg-size-200" +
                                     " hover:bg-gradient-to-l hover:from-purple-600 hover:to-purple-600"}
                                 type="submit">
-                                Vytvořit tutoriál
+                                Upravit tutoriál
                             </button>
                         </form>
                     </>

@@ -25,19 +25,20 @@ const Codes = ({ codes }) => {
 
     const handleDeletion = async (e) => {
         await Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Opravdu chcete tutoriál smazat?',
+            text: "Tuto akci nelze vrátit!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Ano, smazat!',
+            cancelButtonText: 'Ne, vrátit'
         }).then((result) => {
             if (result.isConfirmed) {
                 deleteData(e.target.alt);
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'Úspěch!',
+                    'Váš tutoriál byl smazán.',
                     'success'
                 ).then((result) => {
                     if(result.isConfirmed) {

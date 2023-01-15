@@ -15,7 +15,6 @@ const Profile = ({ avatar }) => {
     const {user, loading} = useFetchUser();
     const [image, setImage] = useState(null);
     const router = useRouter();
-    console.log(avatar);
 
     const uploadToClient = (event) => {
         if (event.target.files && event.target.files[0]){
