@@ -1,9 +1,52 @@
 import Link from "next/link";
 import {useFetchUser} from "../lib/authContext";
 import Image from "next/image";
+import Swal from "sweetalert2";
+import {getTokenFromLocalCookie, getUserFromLocalCookie} from "../lib/auth";
+import {fetcher} from "../lib/api";
+import Router from "next/router";
 
 const Codes = ({ codes }) => {
     const { user, loading } = useFetchUser();
+
+    const deleteData = async (data) => {
+        const jwt = getTokenFromLocalCookie();
+        try {
+            const resData = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/codes/${data}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+        } catch (error) {
+            console.error('error', error);
+        }
+    }
+
+    const handleDeletion = async (e) => {
+        await Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteData(e.target.alt);
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                ).then((result) => {
+                    if(result.isConfirmed) {
+                        Router.reload();
+                    }
+                })
+            }
+        })
+    }
 
     let total = 0;
     let count = 0;
@@ -51,11 +94,17 @@ const Codes = ({ codes }) => {
                                         Autor: <strong>&nbsp;{code.attributes.author}</strong>
                                     </div>
                                 </div>
-                                <hr/>
-                                <p className="font-normal text-justify">{code.attributes.desc}</p>
+                                <hr className={'mb-1'}/>
+                                <div className={'grid'}>
+                                    <p className="font-normal text-justify">{code.attributes.desc}</p>
+                                </div>
+                                <hr className={'mt-1'}/>
                                 {user === code.attributes.author && (
                                     <>
-                                        <div className={"flex flex-wrap items-center w-full mb-2 font-normal"}>
+                                        <div className={"flex flex-wrap items-center w-full mb-2 font-normal mt-2 mb-auto"}>
+                                            <div className={"mr-auto cursor-pointer"} onClick={handleDeletion}>
+                                                    <Image src={'/delete.png'} alt={code.id} className={'bg-white p-1 rounded-md mr-1 hover:bg-red-500'} width={25} height={25}/>
+                                            </div>
                                             <div className={"ml-auto"}>
                                                 <Link href={'code/edit/' + code.attributes.slug}>
                                                     <Image src={'/edit.png'} alt={'Edit button'} className={'bg-white rounded-md mr-1 hover:bg-sky-400'} width={25} height={25}/>

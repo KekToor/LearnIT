@@ -24,6 +24,7 @@
     "react-simple-star-rating": "^5.1.7",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
+    "sweetalert2": "^11.7.0",
     "swr": "^2.0.0",
     "turndown": "^7.1.1"
   },
